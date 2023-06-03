@@ -1,0 +1,26 @@
+{% extends "layout.twig" %}
+{% block title %}Product List{% endblock %}
+
+{% block heading %} <h1>Product List</h1> {% endblock %}
+
+{% block buttons %}
+
+    <button class="success-button" form="product_form" type="submit">
+        <a href="/product">Add</a>
+    </button>
+    <button class="danger-button" type="button">
+        Mass Delete
+    </button>
+
+{% endblock %}
+
+
+{% block content %}
+    <div class="product-container">
+        {% for product in products %}
+            <div class="product">
+
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

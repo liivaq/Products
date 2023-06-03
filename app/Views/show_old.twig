@@ -1,0 +1,77 @@
+{% extends "layout.twig" %}
+
+{% block script %}
+
+{% endblock %}
+
+{% block title %}
+    Product Add
+{% endblock %}
+
+{% block content %}
+    <h1>Product Add</h1>
+    <hr><br>
+    <form id="product_form" method="post" action="/product">
+        <div class="common-attributes">
+            <label for="sku">SKU</label>
+            <input id="sku" name="sku" type="text" autocomplete="off">
+
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="off">
+
+            <label for="price">Price ($)</label>
+            <input id="price" name="price" type="number">
+        </div>
+
+        <div class="type-switcher">
+            <label for="productType">Type Switcher</label>
+            <select id="productType" name="productType">
+                <option value="" disabled selected hidden>Select Product Type</option>
+                <option id="dvd" value="DVD">DVD</option>
+                <option id="book" value="Book">Book</option>
+                <option id="furniture" value="Furniture">Furniture</option>
+            </select>
+
+            <fieldset class="attributes" id="DVD-attributes" hidden>
+                <ul>
+                    <li>
+                        <label for="size">Size (MB)</label>
+                        <input id="size" name="size" type="number">
+                    </li>
+                    <li>Please, provide size in MB</li>
+                </ul>
+            </fieldset>
+
+            <fieldset class="attributes" id="Book-attributes" hidden>
+                <ul>
+                    <li>
+                        <label for="weight">Weight (KG)</label>
+                        <input id="weight" name="weight" type="number">
+                    </li>
+                    <li>Please, provide weight in kgs</li>
+                </ul>
+            </fieldset>
+
+            <fieldset class="attributes" id="Furniture-attributes" hidden>
+                <ul>
+                    <li>
+                        <label for="height">Height (CM)</label>
+                        <input id="height" name="height" type="number">
+                    </li>
+                    <li>
+                        <label for="width">Width (CM)</label>
+                        <input id="width" name="width" type="number">
+                    </li>
+                    <li>
+                        <label for="length">Length (CM)</label>
+                        <input id="length" name="length" type="number">
+                    </li>
+                    <li>Please, provide dimensions in cm</li>
+                </ul>
+            </fieldset>
+        </div>
+        <button type="submit">Save</button>
+        <button type="button">Cancel</button>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,79 @@
+body {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+h1 {
+    font-size: xx-large;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: solid lightgray;
+    margin-bottom: 20px;
+}
+
+button {
+    margin-top: 10px;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    font-size: larger;
+}
+
+.success-button {
+    background: green;
+}
+
+.danger-button {
+    background: red;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.common-attributes {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    grid-gap: 10px;
+}
+
+label{
+    font-size: 25px;
+}
+
+select{
+    font-size: 25px;
+    border-radius: 5px;
+    border-width: 1px;
+    background: white;
+    padding: 5px;
+}
+
+input {
+    border-radius: 5px;
+    border-width: 1px;
+}
+
+input[type=number]{
+    font-size: 25px;
+}
+
+.attributes {
+    border: none;
+    margin-top: 20px;
+}
+
+.instructions {
+    font-style: italic;
+}
+
+.type-switcher {
+    margin-top: 20px;
+
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js">
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#productType').change(function() {
+                $('.attributes').hide();
+                const selectedOption = $(this).val();
+                $('#' + selectedOption + '-attributes').show();
+            });
+        });
+    </script>
+
+</head>
+<body class="">
+<header>
+    <nav class="nav">
+        <div class="page-heading">
+            {% block heading %}{% endblock %}
+        </div>
+        <div class="nav-buttons">
+            {% block buttons %}{% endblock %}
+        </div>
+    </nav>
+</header>
+{% block content %}{% endblock %}
+
+<footer class="">
+</footer>
+
+</body>
+</html>
