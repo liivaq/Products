@@ -8,22 +8,26 @@ use App\Services\Product\CreateProductService;
 use App\Models\Dvd;
 use App\Models\Book;
 use App\Models\Furniture;
+use App\Services\Product\DeleteProductService;
 use App\Services\Product\IndexProductService;
 
 class ProductController
 {
     private CreateProductService $createProductService;
     private IndexProductService $indexProductService;
+    private DeleteProductService $deleteProductService;
 
     public function __construct()
     {
         $this->createProductService = new CreateProductService();
         $this->indexProductService = new IndexProductService();
+        $this->deleteProductService = new DeleteProductService();
     }
 
     public function index(): View
     {
         $products = $this->indexProductService->execute();
+
         return new View('index', [
             'products' => $products
         ]);
@@ -36,14 +40,16 @@ class ProductController
 
     public function create()
     {
+        $productType = 'App\Models\\' .($_POST['type']);
 
-        $productType = 'App\Models\\' . ucfirst($_POST['type']);
+        $this->createProductService->execute(new $productType($_POST));
 
-        /** @var Product $product */
-        $product = new $productType($_POST);
+        header('Location: /');
+    }
 
-        $this->createProductService->execute($product);
-
+    public function delete()
+    {
+        $this->deleteProductService->execute($_POST);
         header('Location: /');
     }
 

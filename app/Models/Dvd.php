@@ -4,13 +4,14 @@ namespace App\Models;
 
 class Dvd extends Product
 {
-    private int $size;
+    protected int $size;
 
     public function __construct(array $attributes)
     {
         parent::__construct($attributes);
 
         $this->size = (int)$attributes['size'];
+        $this->customAttributes['Size'] = $this->size.' MB';
     }
 
     public function getSize(): int

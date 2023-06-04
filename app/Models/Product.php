@@ -4,24 +4,25 @@ namespace App\Models;
 
 abstract class Product
 {
-    private string $SKU;
-    private string $name;
-    private int $price;
-    private string $type;
-    private array $allAttributes;
+    protected string $sku;
+    protected string $name;
+    protected int $price;
+    protected string $type;
+    protected array $allAttributes;
+    protected array $customAttributes = [];
 
     public function __construct(array $attributes)
     {
         $this->allAttributes = $attributes;
-        $this->SKU = $attributes['sku'];
+        $this->sku = $attributes['sku'];
         $this->name = $attributes['name'];
         $this->price = (int)$attributes['price'];
         $this->type = $attributes['type'];
     }
 
-    public function getSKU(): string
+    public function getSku(): string
     {
-        return $this->SKU;
+        return $this->sku;
     }
 
     public function getName(): string
@@ -42,5 +43,10 @@ abstract class Product
     public function allAttributes(): array
     {
         return $this->allAttributes;
+    }
+
+    public function getCustomAttributes(): array
+    {
+        return $this->customAttributes;
     }
 }

@@ -22,14 +22,19 @@ button {
     border-radius: 10px;
     border: none;
     font-size: larger;
+    cursor: pointer;
 }
 
 .success-button {
     background: green;
 }
 
-.danger-button {
+.delete-product-btn {
     background: red;
+}
+
+.cancel-button {
+    background: gray;
 }
 
 a {
@@ -58,10 +63,7 @@ select{
 input {
     border-radius: 5px;
     border-width: 1px;
-}
-
-input[type=number]{
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .attributes {
@@ -79,7 +81,23 @@ input[type=number]{
 
 .product-container{
     display: grid;
-    grid-template-columns: repeat(4, 20% ) ;
+    grid-template-columns: repeat(4, 25% );
+    grid-gap: 10px;
+    justify-content: center;
+}
+
+.product{
+    border: solid;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.delete-checkbox{
+    transform: scale(1.5);
+}
+
+.attribute-list{
+    text-align: center;
 }
 
 @media(max-width:540px){

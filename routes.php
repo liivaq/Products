@@ -5,4 +5,6 @@ return [
     ['GET', '/add-product', ['App\Controllers\ProductController', 'show']],
 
     ['POST', '/product', ['App\Controllers\ProductController', 'create']],
+
+    ['POST', '/delete', ['App\Controllers\ProductController', 'delete']]
 ];

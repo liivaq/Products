@@ -4,13 +4,14 @@ namespace App\Models;
 
 class Book extends Product
 {
-    private int $weight;
+    protected int $weight;
 
     public function __construct(array $attributes)
     {
         parent::__construct($attributes);
 
         $this->weight = (int)$attributes['weight'];
+        $this->customAttributes['Weight'] = $this->weight.' KG';
     }
 
     public function getWeight(): int
@@ -22,5 +23,5 @@ class Book extends Product
     {
         $this->weight = $weight;
     }
-
+    
 }

@@ -32,7 +32,6 @@ class ProductDatabaseRepository
                 $productCollection[] = $this->buildModel($product);
             }
         }
-
         return $productCollection;
     }
 
@@ -40,15 +39,14 @@ class ProductDatabaseRepository
     {
         $values = [];
         foreach ($product->allAttributes() as $key => $attribute) {
-            if($attribute){
-                $values[$key] = ':'.$key;
+            if ($attribute) {
+                $values[$key] = ':' . $key;
             }
         }
 
         $query = $this->queryBuilder
             ->insert('products')
-            ->values($values
-            );
+            ->values($values);
 
         foreach ($product->allAttributes() as $key => $attribute) {
             $query->setParameter($key, $attribute ?? null);
@@ -56,9 +54,20 @@ class ProductDatabaseRepository
         $query->executeStatement();
     }
 
+    public function delete(array $products)
+    {
+        foreach ($products as $sku) {
+            $this->queryBuilder
+                ->delete('products')
+                ->where('sku = :sku')
+                ->setParameter('sku', $sku)
+                ->executeStatement();
+        }
+    }
+
     private function buildModel(array $attributes)
     {
-        $product = 'App\Models\\' . ucfirst($attributes['type']);
+        $product = 'App\Models\\' . $attributes['type'];
         return new $product($attributes);
     }
 }

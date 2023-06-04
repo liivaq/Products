@@ -12,7 +12,7 @@
 
 {% block buttons %}
     <button class="success-button" form="product_form" type="submit">Save</button>
-    <button class="danger-button" type="button">
+    <button class="cancel-button" type="button">
         <a href="/">Cancel</a>
     </button>
 
@@ -35,12 +35,12 @@
             <label for="productType">Type Switcher</label>
             <select class="selector" id="productType" name="type">
                 <option value="" disabled selected hidden>Select Product Type</option>
-                <option id="dvd" value="dvd">DVD</option>
-                <option id="book" value="book">Book</option>
-                <option id="furniture" value="furniture">Furniture</option>
+                <option id="dvd" value="Dvd">DVD</option>
+                <option id="book" value="Book">Book</option>
+                <option id="furniture" value="Furniture">Furniture</option>
             </select>
 
-            <div class="attributes" id="dvd-attributes" hidden>
+            <div class="attributes" id="Dvd-attributes" hidden>
 
                 <label for="size">Size (MB)</label>
                 <input id="size" name="size" type="number" step="0.01" min="0">
@@ -48,14 +48,14 @@
 
             </div>
 
-            <div class="attributes" id="book-attributes" hidden>
+            <div class="attributes" id="Book-attributes" hidden>
                 <label for="weight">Weight (KG)</label>
                 <input id="weight" name="weight" type="number" step="0.01" min="0">
                 <p class="instructions">Please, provide weight in kgs</p>
 
             </div>
 
-            <div class="attributes" id="furniture-attributes" hidden>
+            <div class="attributes" id="Furniture-attributes" hidden>
 
                 <label for="height">Height (CM)</label>
                 <input id="height" name="height" type="number">
@@ -67,6 +67,7 @@
                 <input id="length" name="length"  type="number">
 
                 <p class="instructions">Please, provide dimensions in cm</p>
+
             </div>
         </div>
     </form>

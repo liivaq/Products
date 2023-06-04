@@ -5,10 +5,10 @@
 
 {% block buttons %}
 
-    <button class="success-button" form="product_form" type="submit">
-        <a href="/add-product">Add</a>
+    <button class="success-button">
+        <a  href="/add-product">Add</a>
     </button>
-    <button class="danger-button" type="button">
+    <button class="delete-product-btn" type="submit" form="delete_form">
         Mass Delete
     </button>
 
@@ -16,15 +16,20 @@
 
 
 {% block content %}
-    <div class="product-container">
+    <form class="product-container" id="delete_form" method="post" action="/delete">
         {% for product in products %}
             <div class="product">
-                <ul>
-                    <li>{{ product.sku }}</li>
-                    <li>{{ product.name }}</li>
-                    <li>{{ product.price }}</li>
-                </ul>
+                <input class="delete-checkbox" type="checkbox" id="vehicle1" name="delete[]" value="{{ product.sku }}">
+                   <div class="attribute-list">
+                    <p>{{ product.sku }}</p>
+                    <p>{{ product.name }}</p>
+                    <p>{{ product.price }}</p>
+                    {% for key,attribute in product.customAttributes %}
+                        <p>{{ key }}: {{ attribute }}</p>
+                    {% endfor %}
+                   </div>
+
             </div>
         {% endfor %}
-    </div>
+    </form>
 {% endblock %}
