@@ -6,11 +6,11 @@ class Book extends Product
 {
     private int $weight;
 
-    public function __construct(string $SKU, string $name, int $price, $weight)
+    public function __construct(array $attributes)
     {
-        parent::__construct($SKU, $name, $price);
+        parent::__construct($attributes);
 
-        $this->weight = $weight;
+        $this->weight = (int)$attributes['weight'];
     }
 
     public function getWeight(): int
@@ -22,4 +22,5 @@ class Book extends Product
     {
         $this->weight = $weight;
     }
+
 }

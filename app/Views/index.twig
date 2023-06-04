@@ -6,7 +6,7 @@
 {% block buttons %}
 
     <button class="success-button" form="product_form" type="submit">
-        <a href="/product">Add</a>
+        <a href="/add-product">Add</a>
     </button>
     <button class="danger-button" type="button">
         Mass Delete
@@ -19,7 +19,11 @@
     <div class="product-container">
         {% for product in products %}
             <div class="product">
-
+                <ul>
+                    <li>{{ product.sku }}</li>
+                    <li>{{ product.name }}</li>
+                    <li>{{ product.price }}</li>
+                </ul>
             </div>
         {% endfor %}
     </div>

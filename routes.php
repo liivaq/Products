@@ -2,7 +2,7 @@
 
 return [
     ['GET', '/', ['App\Controllers\ProductController', 'index']],
-    ['GET', '/product', ['App\Controllers\ProductController', 'show']],
+    ['GET', '/add-product', ['App\Controllers\ProductController', 'show']],
 
     ['POST', '/product', ['App\Controllers\ProductController', 'create']],
 ];

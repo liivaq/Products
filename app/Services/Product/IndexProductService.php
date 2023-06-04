@@ -2,21 +2,20 @@
 
 namespace App\Services\Product;
 
-use App\Models\Product;
 use App\Repositories\ProductDatabaseRepository;
 
-class CreateProductService
+class IndexProductService
 {
     private ProductDatabaseRepository $productDatabaseRepository;
 
     public function __construct()
     {
-        $this->productDatabaseRepository = new ProductDatabaseRepository;
+        $this->productDatabaseRepository = new ProductDatabaseRepository();
     }
 
-    public function execute(Product $product)
+    public function execute()
     {
-        $this->productDatabaseRepository->save($product);
+        return $this->productDatabaseRepository->all();
     }
 
 }

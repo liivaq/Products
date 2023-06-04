@@ -8,20 +8,13 @@ class Furniture extends Product
     private int $width;
     private int $length;
 
-    public function __construct(
-        string $SKU,
-        string $name,
-        int    $price,
-        int    $height,
-        int    $width,
-        int    $length
-    )
+    public function __construct(array $attributes)
     {
-        parent::__construct($SKU, $name, $price);
+        parent::__construct($attributes);
 
-        $this->height = $height;
-        $this->length = $length;
-        $this->width = $width;
+        $this->height = (int)$attributes['height'];
+        $this->length = (int) $attributes['length'];
+        $this->width = (int)$attributes['width'];
     }
 
     public function getHeight(): int

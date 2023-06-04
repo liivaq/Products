@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
-class DVD extends Product
+class Dvd extends Product
 {
     private int $size;
 
-    public function __construct(string $SKU, string $name, int $price, $size)
+    public function __construct(array $attributes)
     {
-        parent::__construct($SKU, $name, $price);
+        parent::__construct($attributes);
 
-        $this->size = $size;
+        $this->size = (int)$attributes['size'];
     }
 
     public function getSize(): int
@@ -22,4 +22,5 @@ class DVD extends Product
     {
         $this->size = $size;
     }
+
 }

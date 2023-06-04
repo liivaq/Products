@@ -2,7 +2,3 @@
 
 namespace App\Services\Product;
 
-class CreateProductRequest
-{
-
-}

@@ -75,5 +75,15 @@ input[type=number]{
 
 .type-switcher {
     margin-top: 20px;
+}
 
+.product-container{
+    display: grid;
+    grid-template-columns: repeat(4, 20% ) ;
+}
+
+@media(max-width:540px){
+    .product-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
 }

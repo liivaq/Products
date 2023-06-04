@@ -7,12 +7,16 @@ abstract class Product
     private string $SKU;
     private string $name;
     private int $price;
+    private string $type;
+    private array $allAttributes;
 
-    public function __construct(string $SKU, string $name, int $price)
+    public function __construct(array $attributes)
     {
-        $this->SKU = $SKU;
-        $this->name = $name;
-        $this->price = $price;
+        $this->allAttributes = $attributes;
+        $this->SKU = $attributes['sku'];
+        $this->name = $attributes['name'];
+        $this->price = (int)$attributes['price'];
+        $this->type = $attributes['type'];
     }
 
     public function getSKU(): string
@@ -30,4 +34,13 @@ abstract class Product
         return $this->price;
     }
 
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    public function allAttributes(): array
+    {
+        return $this->allAttributes;
+    }
 }
