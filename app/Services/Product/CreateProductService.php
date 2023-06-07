@@ -14,8 +14,11 @@ class CreateProductService
         $this->productDatabaseRepository = new ProductDatabaseRepository;
     }
 
-    public function execute(Product $product)
+    public function execute(CreateProductRequest $request)
     {
+        $type = 'App\Models\\' . $request->getType();
+        $product = new $type($request);
+
         $this->productDatabaseRepository->save($product);
     }
 

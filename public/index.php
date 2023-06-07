@@ -2,6 +2,7 @@
 
 use App\Core\Renderer;
 use App\Core\Router;
+use App\Core\View;
 
 require_once '../vendor/autoload.php';
 
@@ -11,4 +12,11 @@ $dotenv->load();
 $routes = require_once '../routes.php';
 $response = Router::route($routes);
 
-echo (new Renderer())->render($response);
+if($response instanceof View){
+    echo (new Renderer())->render($response);
+}
+
+if($response instanceof \App\Core\Redirect){
+    header('Location: '.$response->getPath());
+}
+

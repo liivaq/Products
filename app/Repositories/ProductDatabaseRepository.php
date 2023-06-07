@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Core\Database;
 use App\Models\Product;
+use App\Services\Product\CreateProductRequest;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
 
@@ -25,11 +26,12 @@ class ProductDatabaseRepository
             ->from('products')
             ->fetchAllAssociative();
 
+
         $productCollection = [];
 
         if ($products) {
             foreach ($products as $product) {
-                $productCollection[] = $this->buildModel($product);
+                $productCollection[] = $this->buildModel(new CreateProductRequest($product));
             }
         }
         return $productCollection;
@@ -38,7 +40,8 @@ class ProductDatabaseRepository
     public function save(Product $product)
     {
         $values = [];
-        foreach ($product->allAttributes() as $key => $attribute) {
+
+        foreach ($product->getAllAttributes() as $key => $attribute) {
             if ($attribute) {
                 $values[$key] = ':' . $key;
             }
@@ -48,9 +51,10 @@ class ProductDatabaseRepository
             ->insert('products')
             ->values($values);
 
-        foreach ($product->allAttributes() as $key => $attribute) {
+        foreach ($product->getAllAttributes() as $key => $attribute) {
             $query->setParameter($key, $attribute ?? null);
         }
+
         $query->executeStatement();
     }
 
@@ -65,9 +69,9 @@ class ProductDatabaseRepository
         }
     }
 
-    private function buildModel(array $attributes)
+    private function buildModel(CreateProductRequest $request)
     {
-        $product = 'App\Models\\' . $attributes['type'];
-        return new $product($attributes);
+        $product = 'App\Models\\' . $request->getType();
+        return new $product($request);
     }
 }

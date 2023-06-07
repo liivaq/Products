@@ -2,16 +2,18 @@
 
 namespace App\Models;
 
+use App\Services\Product\CreateProductRequest;
+
 class Book extends Product
 {
     protected int $weight;
 
-    public function __construct(array $attributes)
+    public function __construct(CreateProductRequest $request)
     {
-        parent::__construct($attributes);
+        parent::__construct($request);
 
-        $this->weight = (int)$attributes['weight'];
-        $this->customAttributes['Weight'] = $this->weight.' KG';
+        $this->weight = (int)$request->getWeight();
+        $this->measurementUnit = 'KG';
     }
 
     public function getWeight(): int
@@ -19,9 +21,4 @@ class Book extends Product
         return $this->weight;
     }
 
-    public function setWeight(int $weight): void
-    {
-        $this->weight = $weight;
-    }
-    
 }

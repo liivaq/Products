@@ -2,22 +2,23 @@
 
 namespace App\Models;
 
+use App\Services\Product\CreateProductRequest;
+
 abstract class Product
 {
     protected string $sku;
     protected string $name;
     protected int $price;
-    protected string $type;
+    protected string $measurementUnit;
+    protected string $currency = '$';
     protected array $allAttributes;
-    protected array $customAttributes = [];
 
-    public function __construct(array $attributes)
+    public function __construct(CreateProductRequest $request)
     {
-        $this->allAttributes = $attributes;
-        $this->sku = $attributes['sku'];
-        $this->name = $attributes['name'];
-        $this->price = (int)$attributes['price'];
-        $this->type = $attributes['type'];
+        $this->sku = $request->getSku();
+        $this->name = $request->getName();
+        $this->price = (int )$request->getPrice();
+        $this->allAttributes = $request->all();
     }
 
     public function getSku(): string
@@ -35,18 +36,18 @@ abstract class Product
         return $this->price;
     }
 
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-    public function allAttributes(): array
+    public function getAllAttributes(): array
     {
         return $this->allAttributes;
     }
 
-    public function getCustomAttributes(): array
+    public function getMeasurementUnit(): string
     {
-        return $this->customAttributes;
+        return $this->measurementUnit;
+    }
+
+    public function getCurrency(): string
+    {
+        return $this->currency;
     }
 }

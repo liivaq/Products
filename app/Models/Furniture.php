@@ -2,21 +2,22 @@
 
 namespace App\Models;
 
+use App\Services\Product\CreateProductRequest;
+
 class Furniture extends Product
 {
     protected int $height;
     protected int $width;
     protected int $length;
 
-    public function __construct(array $attributes)
+    public function __construct(CreateProductRequest $request)
     {
-        parent::__construct($attributes);
+        parent::__construct($request);
 
-        $this->height = (int)$attributes['height'];
-        $this->length = (int) $attributes['length'];
-        $this->width = (int)$attributes['width'];
-
-        $this->customAttributes['Dimensions'] = $this->height.'x'.$this->length.'x'.$this->width;
+        $this->height = (int) $request->getHeight();
+        $this->length = (int) $request->getLength();
+        $this->width = (int) $request->getWidth();
+        $this->measurementUnit = 'CM';
     }
 
     public function getHeight(): int
@@ -24,29 +25,14 @@ class Furniture extends Product
         return $this->height;
     }
 
-    public function setHeight(int $height): void
-    {
-        $this->height = $height;
-    }
-
     public function getWidth(): int
     {
         return $this->width;
     }
 
-    public function setWidth(int $width): void
-    {
-        $this->width = $width;
-    }
-
     public function getLength(): int
     {
         return $this->length;
-    }
-
-    public function setLength(int $length): void
-    {
-        $this->length = $length;
     }
 
 }

@@ -5,7 +5,7 @@ namespace App\Core;
 use FastRoute;
 class Router
 {
-    public static function route(array $routes): ?View
+    public static function route(array $routes): Response
     {
         $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $router) use ($routes) {
             foreach ($routes as $route) {
@@ -33,6 +33,6 @@ class Router
                 [$controller, $method] = $handler;
                 return (new $controller)->{$method}($vars);
         }
-        return null;
+        return new Redirect('/');
     }
 }

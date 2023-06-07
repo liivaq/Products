@@ -2,8 +2,11 @@
 
 namespace App\Controllers;
 
+use App\Core\Redirect;
 use App\Core\View;
+
 use App\Models\Product;
+use App\Services\Product\CreateProductRequest;
 use App\Services\Product\CreateProductService;
 use App\Models\Dvd;
 use App\Models\Book;
@@ -38,19 +41,16 @@ class ProductController
         return new View('show');
     }
 
-    public function create()
+
+    public function create(): Redirect
     {
-        $productType = 'App\Models\\' .($_POST['type']);
-
-        $this->createProductService->execute(new $productType($_POST));
-
-        header('Location: /');
+        $this->createProductService->execute(new CreateProductRequest($_POST));
+        return new Redirect('/');
     }
 
-    public function delete()
+    public function delete(): Redirect
     {
         $this->deleteProductService->execute($_POST);
-        header('Location: /');
+        return new Redirect('/');
     }
-
 }

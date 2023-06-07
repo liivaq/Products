@@ -11,7 +11,7 @@
 {% block heading %} <h1>Product Add</h1> {% endblock %}
 
 {% block buttons %}
-    <button class="success-button" form="product_form" type="submit">Save</button>
+    <button class="success-button" form="product_form" type="submit" id="submit">Save</button>
     <button class="cancel-button" type="button">
         <a href="/">Cancel</a>
     </button>
@@ -40,36 +40,42 @@
                 <option id="furniture" value="Furniture">Furniture</option>
             </select>
 
-            <div class="attributes" id="Dvd-attributes" hidden>
-
-                <label for="size">Size (MB)</label>
-                <input id="size" name="size" type="number" step="0.01" min="0">
-                <p class="instructions">Please, provide size in MB</p>
-
-            </div>
-
-            <div class="attributes" id="Book-attributes" hidden>
-                <label for="weight">Weight (KG)</label>
-                <input id="weight" name="weight" type="number" step="0.01" min="0">
-                <p class="instructions">Please, provide weight in kgs</p>
-
-            </div>
-
-            <div class="attributes" id="Furniture-attributes" hidden>
-
-                <label for="height">Height (CM)</label>
-                <input id="height" name="height" type="number">
-
-                <label for="width">Width (CM)</label>
-                <input id="width" name="width" type="number">
-
-                <label for="length">Length (CM)</label>
-                <input id="length" name="length"  type="number">
-
-                <p class="instructions">Please, provide dimensions in cm</p>
-
-            </div>
+            <div id="additionalFields"></div>
         </div>
-    </form>
 
+        <p id="form-message"></p>
+    </form>
+    <script>
+        $(document).ready(function () {
+            var fieldsConfig = {
+                Book: [
+                    {label: 'Weight', name: 'weight', type: 'text'}
+                ],
+                Dvd: [
+                    {label: 'Size', name: 'size', type: 'text'}
+                ],
+                Furniture: [
+                    {label: 'Length', name: 'length', type: 'text'},
+                    {label: 'Width', name: 'width', type: 'text'},
+                    {label: 'Height', name: 'height', type: 'text'}
+                ]
+            };
+
+            // Function to handle the change event of the productType select element
+            $('#productType').change(function () {
+                var selectedType = $(this).val(); // Get the selected value
+
+                // Clear the additionalFields div
+                $('#additionalFields').empty();
+
+                if (selectedType && fieldsConfig[selectedType]) {
+                    // Generate fields based on the selected type
+                    fieldsConfig[selectedType].forEach(function (field) {
+                        $('#additionalFields').append('<label for="' + field.name + '">' + field.label + '</label>');
+                        $('#additionalFields').append('<input id="' + field.name + '" name="' + field.name + '" type="' + field.type + '" >');
+                    });
+                }
+            });
+        });
+    </script>
 {% endblock %}
