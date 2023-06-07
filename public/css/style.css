@@ -43,9 +43,9 @@ a {
 }
 
 .common-attributes {
-    display: grid;
+    /*display: grid;
     grid-template-columns: max-content max-content;
-    grid-gap: 10px;
+    grid-gap: 10px;*/
 }
 
 label{
@@ -69,6 +69,11 @@ input {
 .attributes {
     border: none;
     margin-top: 20px;
+    display: flex;
+}
+
+.attributes input{
+    margin-left: 20px;
 }
 
 .instructions {
@@ -104,4 +109,9 @@ input {
     .product-container {
         grid-template-columns: repeat(1, 1fr);
     }
+}
+
+.error{
+    color:red;
+    font-size: small;
 }

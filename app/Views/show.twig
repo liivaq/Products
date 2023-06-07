@@ -12,69 +12,109 @@
 
 {% block buttons %}
     <button class="success-button" form="product_form" type="submit" id="submit">Save</button>
-    <button class="cancel-button" type="button">
-        <a href="/">Cancel</a>
-    </button>
+    <a href="/">
+        <button class="cancel-button" type="button"> Cancel</button>
+    </a>
 
 {% endblock %}
 
 {% block content %}
     <form id="product_form" method="post" action="/product">
         <div class="common-attributes">
-            <label for="sku">SKU</label>
-            <input id="sku" name="sku" type="text" autocomplete="off">
 
-            <label for="name">Name</label>
-            <input id="name" name="name" type="text" autocomplete="off">
+            <div>
+                <label for="sku">SKU</label>
+                <input id="sku" name="sku" type="text" autocomplete="off" class="required">
+                <p><label id="sku-error" class="error" for="sku"></label></p>
+            </div>
 
-            <label for="price">Price ($)</label>
-            <input id="price" name="price" type="number" step="0.01" min="0">
+            <div>
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" class="required">
+                <p><label id="name-error" class="error" for="name"></label></p>
+            </div>
+
+            <div>
+                <label for="price">Price ($)</label>
+                <input id="price" name="price" type="number" step="0.01" min="0">
+                <p><label id="price-error" class="error" for="price"></label></p>
+            </div>
+
+            <div class="type-switcher">
+                <label for="productType">Type Switcher</label>
+                <select class="selector" id="productType" name="type">
+                    <option value="" disabled selected hidden>Select Product Type</option>
+                    <option id="dvd" value="Dvd">DVD</option>
+                    <option id="book" value="Book">Book</option>
+                    <option id="furniture" value="Furniture">Furniture</option>
+                </select>
+                <p><label id="productType-error" class="error" for="productType"></label></p>
+
+                <div id="additionalFields" class="required"></div>
+                <p><label id="additionalFields-error" class="error" for="additionalFields"></label></p>
+                <div id="typeDescription"></div>
+            </div>
+            <div id="errors"></div>
         </div>
-
-        <div class="type-switcher">
-            <label for="productType">Type Switcher</label>
-            <select class="selector" id="productType" name="type">
-                <option value="" disabled selected hidden>Select Product Type</option>
-                <option id="dvd" value="Dvd">DVD</option>
-                <option id="book" value="Book">Book</option>
-                <option id="furniture" value="Furniture">Furniture</option>
-            </select>
-
-            <div id="additionalFields"></div>
-        </div>
-
-        <p id="form-message"></p>
     </form>
+
+    <script src="/js/add-product.js"></script>
+
     <script>
         $(document).ready(function () {
-            var fieldsConfig = {
-                Book: [
-                    {label: 'Weight', name: 'weight', type: 'text'}
-                ],
-                Dvd: [
-                    {label: 'Size', name: 'size', type: 'text'}
-                ],
-                Furniture: [
-                    {label: 'Length', name: 'length', type: 'text'},
-                    {label: 'Width', name: 'width', type: 'text'},
-                    {label: 'Height', name: 'height', type: 'text'}
-                ]
-            };
-
-            // Function to handle the change event of the productType select element
-            $('#productType').change(function () {
-                var selectedType = $(this).val(); // Get the selected value
-
-                // Clear the additionalFields div
-                $('#additionalFields').empty();
-
-                if (selectedType && fieldsConfig[selectedType]) {
-                    // Generate fields based on the selected type
-                    fieldsConfig[selectedType].forEach(function (field) {
-                        $('#additionalFields').append('<label for="' + field.name + '">' + field.label + '</label>');
-                        $('#additionalFields').append('<input id="' + field.name + '" name="' + field.name + '" type="' + field.type + '" >');
-                    });
+            jQuery.validator.addClassRules("required", {
+                required: true,
+                normalizer: function (value) {
+                    return $.trim(value);
                 }
+            });
+
+            $('#product_form').validate({
+                rules: {
+                    sku: {
+                        required: true,
+                        minlength: 5
+                    },
+                    name: {
+                        required: true,
+                        minlength: 2
+                    },
+                    price: {
+                        required: true,
+                        min: 0
+                    },
+                    size: {
+                        required: true,
+                        min: 0
+                    },
+                    weight: {
+                        required: true,
+                        min: 0
+                    },
+                    height: {
+                        required: true,
+                        min: 0
+                    },
+                    width: {
+                        required: true,
+                        min: 0
+                    },
+                    length: {
+                        required: true,
+                        min: 0
+                    },
+                    type: {
+                        required: true
+                    }
+                },
+
+                messages: {
+                    sku: {
+                        required: "Please enter a SKU",
+                        minlength: "SKU should consist of at least 5 characters"
+                    },
+                }
+
             });
         });
     </script>

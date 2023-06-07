@@ -13,6 +13,7 @@ use App\Models\Book;
 use App\Models\Furniture;
 use App\Services\Product\DeleteProductService;
 use App\Services\Product\IndexProductService;
+use Dotenv\Validator;
 
 class ProductController
 {
@@ -44,6 +45,9 @@ class ProductController
 
     public function create(): Redirect
     {
+
+        $errors = \App\Core\Validator::form($_POST);
+
         $this->createProductService->execute(new CreateProductRequest($_POST));
         return new Redirect('/');
     }
