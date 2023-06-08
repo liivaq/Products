@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Core\Database;
+use App\Exceptions\ProductAlreadyExistsException;
 use App\Models\Product;
 use App\Services\Product\CreateProductRequest;
 use Doctrine\DBAL\Connection;
@@ -39,6 +40,10 @@ class ProductDatabaseRepository
 
     public function save(Product $product)
     {
+        if(!$this->authenticate($product->getSku())){
+            throw new ProductAlreadyExistsException('Product with sku '. $product->getSku() .'already exists');
+        };
+
         $values = [];
 
         foreach ($product->getAllAttributes() as $key => $attribute) {

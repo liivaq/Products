@@ -2,21 +2,21 @@ $(document).ready(function () {
     const fieldsConfig = {
         Book: {
             fields: [
-                {label: 'Weight', name: 'weight', type: 'text'}
+                { label: 'Weight (KG)', name: 'weight', type: 'text' }
             ],
             description: 'Please provide weight.'
         },
         Dvd: {
             fields: [
-                {label: 'Size', name: 'size', type: 'text'}
+                { label: 'Size (MB)', name: 'size', type: 'text' }
             ],
             description: 'Please provide size.'
         },
         Furniture: {
             fields: [
-                {label: 'Length', name: 'length', type: 'text'},
-                {label: 'Width', name: 'width', type: 'text'},
-                {label: 'Height', name: 'height', type: 'text'}
+                { label: 'Length (CM)', name: 'length', type: 'text' },
+                { label: 'Width (CM)', name: 'width', type: 'text' },
+                { label: 'Height (CM)', name: 'height', type: 'text' }
             ],
             description: 'Please provide dimensions.'
         }
@@ -27,19 +27,18 @@ $(document).ready(function () {
         const selectedType = $(this).val(); // Get the selected value
 
         // Clear the additionalFields div
-        $('#additionalFields, #typeDescription').empty();
+        $('#additionalFields').empty();
         const typeConfig = fieldsConfig[selectedType];
 
         // Generate fields based on the selected type
         typeConfig.fields.forEach(function (field) {
-            const fieldContainer = $('<div class="attributes required"></div>');
-            fieldContainer.append(`<label for="${field.name}">${field.label}</label>`);
-            fieldContainer.append(`<input id="${field.name}" name="${field.name}" type="${field.type}">`);
-            $('#additionalFields').append(fieldContainer);
+            const fieldGroup = $('<div class="form-group"></div>');
+            fieldGroup.append(`<label for="${field.name}">${field.label}</label>`);
+            fieldGroup.append(`<input id="${field.name}" name="${field.name}" type="${field.type}">`);
+            $('#additionalFields').append(fieldGroup);
         });
 
         // Display the description for the selected type
         $('#typeDescription').text(typeConfig.description);
-
     });
 });

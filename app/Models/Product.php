@@ -8,7 +8,7 @@ abstract class Product
 {
     protected string $sku;
     protected string $name;
-    protected int $price;
+    protected float $price;
     protected string $measurementUnit;
     protected string $currency = '$';
     protected array $allAttributes;
@@ -17,7 +17,7 @@ abstract class Product
     {
         $this->sku = $request->getSku();
         $this->name = $request->getName();
-        $this->price = (int )$request->getPrice();
+        $this->price = (float)$request->getPrice();
         $this->allAttributes = $request->all();
     }
 
@@ -31,7 +31,7 @@ abstract class Product
         return $this->name;
     }
 
-    public function getPrice(): int
+    public function getPrice(): float
     {
         return $this->price;
     }

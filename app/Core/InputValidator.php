@@ -2,7 +2,7 @@
 
 namespace App\Core;
 
-class SkuValidator implements Response
+class InputValidator implements Response
 {
     private bool $response;
 

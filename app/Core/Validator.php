@@ -4,26 +4,17 @@ namespace App\Core;
 
 class Validator
 {
-    public static function form(array $request): array
+    public static function form(array $request): bool
     {
-        $errors = [];
-
         foreach($request as $attribute){
             if(empty($attribute)){
-                $errors['empty'] = 'Please, fill in all the fields';
+                Session::flash('errors', 'Please, submit required data');
             }
 
             if(is_numeric($attribute) && $attribute < 0){
-                $errors['numbers'] = 'Value should be greater than or equal to 0';
+                Session::flash('errors', 'Please, provide the data of indicated type');
             }
         }
-
-        self::validateSku($request['sku']);
-        return $errors;
+        return Session::has('errors');
     }
-
-    private static function validateSku (string $sku){
-
-    }
-
 }

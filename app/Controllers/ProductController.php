@@ -4,9 +4,12 @@ namespace App\Controllers;
 
 use App\Core\Redirect;
 use App\Core\Response;
-use App\Core\SkuValidator;
+use App\Core\InputValidator;
+use App\Core\Session;
+use App\Core\Validator;
 use App\Core\View;
 
+use App\Exceptions\ProductAlreadyExistsException;
 use App\Services\Product\CreateProductRequest;
 use App\Services\Product\CreateProductService;
 use App\Services\Product\DeleteProductService;
@@ -43,13 +46,22 @@ class ProductController
         return new View('show');
     }
 
-
     public function create(): Response
     {
+        foreach ($_POST as $key => $value){
+            Session::flash($key, $value);
+        }
 
-        $errors = \App\Core\Validator::form($_POST);
+        if(Validator::form($_POST)){
+            return new Redirect('/add-product');
+        };
 
-        $this->createProductService->execute(new CreateProductRequest($_POST));
+        try{
+            $this->createProductService->execute(new CreateProductRequest($_POST));
+        }catch(ProductAlreadyExistsException $e){
+            Session::flash('errors', 'Product with this SKU already exists');
+            return new Redirect('/add-product');
+        }
         return new Redirect('/');
     }
 
@@ -59,10 +71,10 @@ class ProductController
         return new Redirect('/');
     }
 
-    public function validateSku(): SkuValidator
+    public function validateSku(): InputValidator
     {
         $response = $this->validateProductService->execute($_POST['sku']);
-        return new SkuValidator($response);
+        return new InputValidator($response);
     }
 
 }

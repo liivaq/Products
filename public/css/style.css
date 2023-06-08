@@ -42,48 +42,59 @@ a {
     color: white;
 }
 
-.common-attributes {
-    /*display: grid;
-    grid-template-columns: max-content max-content;
-    grid-gap: 10px;*/
-}
-
-label{
-    font-size: 25px;
-}
-
-select{
-    font-size: 25px;
-    border-radius: 5px;
-    border-width: 1px;
-    background: white;
-    padding: 5px;
-}
-
-input {
-    border-radius: 5px;
-    border-width: 1px;
-    font-size: 20px;
-    height: 30px;
-    width: 300px;
-}
-
-.attributes {
-    border: none;
-    margin-top: 20px;
-    display: flex;
-}
-
-.attributes input{
+#product_form {
+    width: 400px;
     margin-left: 20px;
+}
+
+/* Form groups */
+.form-group {
+
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Labels */
+label {
+    flex: 0 0 100px;
+    text-align: right;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+/* Input fields */
+input[type="text"],
+input[type="number"],
+select {
+
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Error labels */
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+    flex: 1;
+}
+
+/* Additional field error labels */
+.additionalFieldRow .error {
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+/* Style the type description */
+#typeDescription {
+    margin-top: 10px;
+    font-style: italic;
 }
 
 .instructions {
     font-style: italic;
-}
-
-.type-switcher {
-    margin-top: 20px;
 }
 
 .product-container{
@@ -103,11 +114,13 @@ input {
     transform: scale(1.5);
 }
 
-.attribute-list{
-    text-align: center;
+@media(max-width:960px){
+    .product-container {
+        grid-template-columns: repeat(2, 2fr);
+    }
 }
 
-@media(max-width:540px){
+@media(max-width:580px){
     .product-container {
         grid-template-columns: repeat(1, 1fr);
     }

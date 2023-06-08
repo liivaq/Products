@@ -20,135 +20,39 @@
 
 {% block content %}
     <form id="product_form" method="post" action="/product">
-        <div class="common-attributes">
-
-            <div>
-                <label for="sku">SKU</label>
-                <input id="sku" name="sku" type="text" autocomplete="off" class="required">
-            </div>
-
-            <div>
-                <label for="name">Name</label>
-                <input id="name" name="name" type="text" class="required">
-            </div>
-
-            <div>
-                <label for="price">Price ($)</label>
-                <input id="price" name="price" type="number" step="0.01" min="0">
-            </div>
-
-            <div class="type-switcher">
-                <label for="productType">Type Switcher</label>
-                <select class="selector" id="productType" name="type">
-                    <option value="" disabled selected hidden>Select Product Type</option>
-                    <option id="dvd" value="Dvd">DVD</option>
-                    <option id="book" value="Book">Book</option>
-                    <option id="furniture" value="Furniture">Furniture</option>
-                </select>
-
-                <div id="additionalFields" class="required"></div>
-                <p><label id="additionalFields-error" class="error" for="additionalFields"></label></p>
-                <div id="typeDescription"></div>
-            </div>
-            <div id="errors"></div>
+        <div class="form-group">
+            <label for="sku">SKU</label>
+            <input id="sku" name="sku" type="text" value="{{ session._flash.sku }}">
+            <label id="sku-error" class="error" for="sku"></label>
         </div>
+
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" value="{{ session._flash.name }}">
+            <label id="name-error" class="error" for="name"></label>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input id="price" name="price" type="number" step="0.01" min="0" value="{{ session._flash.price }}">
+            <label id="price-error" class="error" for="price"></label>
+        </div>
+
+        <div class="form-group">
+            <label for="productType">Type Switcher</label>
+            <select class="selector" id="productType" name="type">
+                <option value="" disabled selected hidden>Select Product Type</option>
+                <option id="dvd" value="Dvd">DVD</option>
+                <option id="book" value="Book">Book</option>
+                <option id="furniture" value="Furniture">Furniture</option>
+            </select>
+            <label id="productType-error" class="error" for="name"></label>
+        </div>
+
+        <div id="additionalFields"></div>
+
+        <div id="typeDescription"></div>
     </form>
-
-    <script src="/js/add-product.js"></script>
-
-    <script>
-        $(document).ready(function () {
-            jQuery.validator.addClassRules("required", {
-                required: true,
-                normalizer: function (value) {
-                    return $.trim(value);
-                }
-            });
-
-            $('#product_form').validate({
-                rules: {
-                    sku: {
-                        required: true,
-                        minlength: 5,
-                        remote: {
-                            url: "/sku",
-                            type: "post"
-                        }
-                    },
-                    name: {
-                        required: true,
-                        minlength: 2
-                    },
-                    price: {
-                        required: true,
-                        digits: true
-                    },
-                    size: {
-                        required: true,
-                        digits: true
-                    },
-                    weight: {
-                        required: true,
-                        digits: true
-                    },
-                    height: {
-                        required: true,
-                        digits: true
-                    },
-                    width: {
-                        required: true,
-                        digits: true
-                    },
-                    length: {
-                        required: true,
-                        digits: true
-                    },
-                    type: {
-                        required: true
-                    }
-                },
-
-                messages: {
-                    sku: {
-                        required: "Please, submit required data",
-                        minlength: "Please, provide the data of indicated type",
-                        remote: "Product with this SKU already exists "
-                    },
-                    name: {
-                        required: "Please, submit required data",
-                        minlength: "Please, provide the data of indicated type"
-                    },
-                    price: {
-                        required: "Please, submit required data",
-                        digits: "Please, provide the data of indicated type"
-                    },
-                    size: {
-                        required: "Please, submit required data",
-                        digits: "Please, provide the data of indicated type"
-                    },
-                    weight: {
-                        required: "Please, submit required data",
-                        digits: "Please, provide the data of indicated type"
-                    },
-                    length: {
-                        required: "Please, submit required data",
-                        digits: "Please, provide the data of indicated type"
-                    },
-                    width: {
-                        required: "Please, submit required data",
-                        digits: "Please, provide the data of indicated type"
-                    },
-                    height: {
-                        required: "Please, submit required data",
-                        digits: "Please, provide the data of indicated type"
-                    },
-                    type: {
-                        required: "Please, submit required data",
-                        digits: "Please, provide the data of indicated type"
-                    }
-                }
-
-            });
-        });
-    </script>
+    <script src="/js/custom-attributes.js"></script>
+    <script src="/js/validate.js"></script>
 {% endblock %}
