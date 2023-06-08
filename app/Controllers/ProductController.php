@@ -3,17 +3,15 @@
 namespace App\Controllers;
 
 use App\Core\Redirect;
+use App\Core\Response;
+use App\Core\SkuValidator;
 use App\Core\View;
 
-use App\Models\Product;
 use App\Services\Product\CreateProductRequest;
 use App\Services\Product\CreateProductService;
-use App\Models\Dvd;
-use App\Models\Book;
-use App\Models\Furniture;
 use App\Services\Product\DeleteProductService;
 use App\Services\Product\IndexProductService;
-use Dotenv\Validator;
+use App\Services\Product\ValidateProductService;
 
 class ProductController
 {
@@ -21,11 +19,14 @@ class ProductController
     private IndexProductService $indexProductService;
     private DeleteProductService $deleteProductService;
 
+    private ValidateProductService $validateProductService;
+
     public function __construct()
     {
         $this->createProductService = new CreateProductService();
         $this->indexProductService = new IndexProductService();
         $this->deleteProductService = new DeleteProductService();
+        $this->validateProductService = new ValidateProductService();
     }
 
     public function index(): View
@@ -43,7 +44,7 @@ class ProductController
     }
 
 
-    public function create(): Redirect
+    public function create(): Response
     {
 
         $errors = \App\Core\Validator::form($_POST);
@@ -57,4 +58,11 @@ class ProductController
         $this->deleteProductService->execute($_POST);
         return new Redirect('/');
     }
+
+    public function validateSku(): SkuValidator
+    {
+        $response = $this->validateProductService->execute($_POST['sku']);
+        return new SkuValidator($response);
+    }
+
 }

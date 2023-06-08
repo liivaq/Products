@@ -2,6 +2,7 @@
 
 use App\Core\Renderer;
 use App\Core\Router;
+use App\Core\SkuValidator;
 use App\Core\View;
 
 require_once '../vendor/autoload.php';
@@ -18,5 +19,9 @@ if($response instanceof View){
 
 if($response instanceof \App\Core\Redirect){
     header('Location: '.$response->getPath());
+}
+
+if($response instanceof SkuValidator){
+    echo json_encode($response->isResponse());
 }
 

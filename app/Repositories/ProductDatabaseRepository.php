@@ -69,6 +69,20 @@ class ProductDatabaseRepository
         }
     }
 
+    public function authenticate(string $sku){
+        $product = $this->queryBuilder
+            ->select('*')
+            ->from('products')
+            ->where('sku = :sku')
+            ->setParameter('sku', $sku)
+            ->executeStatement();
+
+        if ($product > 0) {
+            return false;
+        }
+        return true;
+    }
+
     private function buildModel(CreateProductRequest $request)
     {
         $product = 'App\Models\\' . $request->getType();

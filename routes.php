@@ -6,5 +6,7 @@ return [
 
     ['POST', '/product', ['App\Controllers\ProductController', 'create']],
 
-    ['POST', '/delete', ['App\Controllers\ProductController', 'delete']]
+    ['POST', '/delete', ['App\Controllers\ProductController', 'delete']],
+
+    ['POST', '/sku', ['App\Controllers\ProductController', 'validateSku']]
 ];
