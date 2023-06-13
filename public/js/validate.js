@@ -8,39 +8,44 @@ $(document).ready(function () {
 
     $('#product_form').validate({
         rules: {
-            sku: {
+            'attributes[sku]': {
                 required: true,
                 minlength: 5,
                 remote: {
-                    url: "/sku",
-                    type: "post"
+                    url: "/validate",
+                    type: "post",
+                    data: {
+                        sku: function() {
+                            return $( "#sku" ).val();
+                        }
+                    }
                 }
             },
-            name: {
+            'attributes[name]': {
                 required: true,
                 minlength: 2
             },
-            price: {
+            'attributes[price]': {
                 required: true,
                 step: 0.01
             },
-            size: {
+            'attributes[size]': {
                 required: true,
                 digits: true
             },
-            weight: {
+            'attributes[weight]': {
                 required: true,
                 digits: true
             },
-            height: {
+            'attributes[height]': {
                 required: true,
                 digits: true
             },
-            width: {
+            'attributes[width]': {
                 required: true,
                 digits: true
             },
-            length: {
+            'attributes[length]': {
                 required: true,
                 digits: true
             },
@@ -50,36 +55,36 @@ $(document).ready(function () {
         },
 
         messages: {
-            sku: {
+            'attributes[sku]': {
                 required: "Please, submit required data",
                 minlength: "Please, provide the data of indicated type",
                 remote: "Product with this SKU already exists"
             },
-            name: {
+            'attributes[name]': {
                 required: "Please, submit required data",
                 minlength: "Please, provide the data of indicated type"
             },
-            price: {
+            'attributes[price]': {
                 required: "Please, submit required data",
                 digits: "Please, provide the data of indicated type"
             },
-            size: {
+            'attributes[size]': {
                 required: "Please, submit required data",
                 digits: "Please, provide the data of indicated type"
             },
-            weight: {
+            'attributes[weight]': {
                 required: "Please, submit required data",
                 digits: "Please, provide the data of indicated type"
             },
-            length: {
+            'attributes[length]': {
                 required: "Please, submit required data",
                 digits: "Please, provide the data of indicated type"
             },
-            width: {
+            'attributes[width]': {
                 required: "Please, submit required data",
                 digits: "Please, provide the data of indicated type"
             },
-            height: {
+            'attributes[height]': {
                 required: "Please, submit required data",
                 digits: "Please, provide the data of indicated type"
             },
@@ -87,6 +92,5 @@ $(document).ready(function () {
                 required: "",
             }
         }
-
     });
 });

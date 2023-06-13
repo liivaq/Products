@@ -2,15 +2,13 @@
 
 namespace App\Controllers;
 
-use App\Core\Redirect;
-use App\Core\Response;
-use App\Core\InputValidator;
+use App\Core\Response\Redirect;
+use App\Core\Response\Response;
+use App\Core\Response\Validation;
+use App\Core\Response\View;
 use App\Core\Session;
 use App\Core\Validator;
-use App\Core\View;
-
 use App\Exceptions\ProductAlreadyExistsException;
-use App\Services\Product\CreateProductRequest;
 use App\Services\Product\CreateProductService;
 use App\Services\Product\DeleteProductService;
 use App\Services\Product\IndexProductService;
@@ -41,24 +39,24 @@ class ProductController
         ]);
     }
 
-    public function show(): View
+    public function create(): View
     {
-        return new View('show');
+        return new View('create');
     }
 
-    public function create(): Response
+    public function store(): Response
     {
-        foreach ($_POST as $key => $value){
+        foreach ($_POST['attributes'] as $key => $value) {
             Session::flash($key, $value);
         }
 
-        if(Validator::form($_POST)){
+        if (Validator::form($_POST)) {
             return new Redirect('/add-product');
         };
 
-        try{
-            $this->createProductService->execute(new CreateProductRequest($_POST));
-        }catch(ProductAlreadyExistsException $e){
+        try {
+            $this->createProductService->execute($_POST['type'], $_POST['attributes']);
+        } catch (ProductAlreadyExistsException $e) {
             Session::flash('errors', 'Product with this SKU already exists');
             return new Redirect('/add-product');
         }
@@ -67,14 +65,22 @@ class ProductController
 
     public function delete(): Redirect
     {
+        if(empty($_POST['delete'])){
+            return new Redirect('/');
+        }
+
         $this->deleteProductService->execute($_POST);
         return new Redirect('/');
     }
 
-    public function validateSku(): InputValidator
+    public function validate(): Validation
     {
-        $response = $this->validateProductService->execute($_POST['sku']);
-        return new InputValidator($response);
+        try {
+            $this->validateProductService->execute($_POST['sku']);
+            $response = true;
+        }catch(ProductAlreadyExistsException $e){
+            $response = false;
+        }
+        return new Validation($response);
     }
-
 }

@@ -2,6 +2,7 @@
 
 namespace App\Core;
 
+use App\Core\Response\View;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 

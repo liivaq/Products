@@ -1,0 +1,21 @@
+{% extends "layout.twig" %}
+{% block title %}Not Found{% endblock %}
+
+{% block heading %} <h1>Ooops!</h1> {% endblock %}
+
+{% block buttons %}
+
+    <a href="/">
+        <button class="success-button">Product list</button>
+    </a>
+
+{% endblock %}
+
+
+{% block content %}
+    <div>
+        <h2>Sorry, the requested page was not found!</h2>
+        <p><a href="/">Back to Product List page</a></p>
+    </div>
+
+{% endblock %}

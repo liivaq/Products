@@ -2,17 +2,15 @@
 
 namespace App\Models;
 
-use App\Services\Product\CreateProductRequest;
-
 class Dvd extends Product
 {
     protected int $size;
 
-    public function __construct(CreateProductRequest $request)
+    public function __construct(array $attributes, string $type)
     {
-        parent::__construct($request);
+        parent::__construct($attributes, $type);
 
-        $this->size = (int )$request->getSize();
+        $this->size = (int )$attributes['size'];
         $this->measurementUnit = 'MB';
     }
 

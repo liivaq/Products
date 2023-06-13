@@ -5,7 +5,6 @@ namespace App\Repositories;
 use App\Core\Database;
 use App\Exceptions\ProductAlreadyExistsException;
 use App\Models\Product;
-use App\Services\Product\CreateProductRequest;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder;
 
@@ -20,29 +19,27 @@ class ProductDatabaseRepository
         $this->queryBuilder = $this->connection->createQueryBuilder();
     }
 
-    public function all()
+    public function all(): array
     {
         $products = $this->queryBuilder
             ->select('*')
             ->from('products')
             ->fetchAllAssociative();
 
-
         $productCollection = [];
 
         if ($products) {
             foreach ($products as $product) {
-                $productCollection[] = $this->buildModel(new CreateProductRequest($product));
+                $productCollection[] = $this->buildModel($product['type'], $product);
             }
         }
+
         return $productCollection;
     }
 
-    public function save(Product $product)
+    public function save(Product $product): void
     {
-        if(!$this->authenticate($product->getSku())){
-            throw new ProductAlreadyExistsException('Product with sku '. $product->getSku() .'already exists');
-        };
+        $this->authenticate($product->getSku());
 
         $values = [];
 
@@ -63,7 +60,7 @@ class ProductDatabaseRepository
         $query->executeStatement();
     }
 
-    public function delete(array $products)
+    public function delete(array $products): void
     {
         foreach ($products as $sku) {
             $this->queryBuilder
@@ -74,7 +71,8 @@ class ProductDatabaseRepository
         }
     }
 
-    public function authenticate(string $sku){
+    public function authenticate(string $sku): void
+    {
         $product = $this->queryBuilder
             ->select('*')
             ->from('products')
@@ -83,14 +81,13 @@ class ProductDatabaseRepository
             ->executeStatement();
 
         if ($product > 0) {
-            return false;
+            throw new ProductAlreadyExistsException('Product with sku '. $sku .'already exists');
         }
-        return true;
     }
 
-    private function buildModel(CreateProductRequest $request)
+    private function buildModel(string $type, array $attributes)
     {
-        $product = 'App\Models\\' . $request->getType();
-        return new $product($request);
+        $product = 'App\Models\\' . $type;
+        return new $product($attributes, $type);
     }
 }

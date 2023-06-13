@@ -2,7 +2,6 @@
 
 namespace App\Services\Product;
 
-use App\Models\Product;
 use App\Repositories\ProductDatabaseRepository;
 
 class CreateProductService
@@ -14,10 +13,10 @@ class CreateProductService
         $this->productDatabaseRepository = new ProductDatabaseRepository;
     }
 
-    public function execute(CreateProductRequest $request)
+    public function execute(string $type, array $attributes)
     {
-        $type = 'App\Models\\' . $request->getType();
-        $product = new $type($request);
+        $productType = 'App\Models\\' . $type;
+        $product = new $productType($attributes, $type);
 
         $this->productDatabaseRepository->save($product);
     }

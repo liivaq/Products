@@ -8,15 +8,15 @@ $(document).ready(function () {
         },
         Dvd: {
             fields: [
-                { label: 'Size (MB)', name: 'size', type: 'text' }
+                { label: 'Size (MB)', name: 'size', type: 'number' }
             ],
             description: 'Please provide size.'
         },
         Furniture: {
             fields: [
-                { label: 'Length (CM)', name: 'length', type: 'text' },
-                { label: 'Width (CM)', name: 'width', type: 'text' },
-                { label: 'Height (CM)', name: 'height', type: 'text' }
+                { label: 'Length (CM)', name: 'length', type: 'number' },
+                { label: 'Width (CM)', name: 'width', type: 'number' },
+                { label: 'Height (CM)', name: 'height', type: 'number' }
             ],
             description: 'Please provide dimensions.'
         }
@@ -34,7 +34,7 @@ $(document).ready(function () {
         typeConfig.fields.forEach(function (field) {
             const fieldGroup = $('<div class="form-group"></div>');
             fieldGroup.append(`<label for="${field.name}">${field.label}</label>`);
-            fieldGroup.append(`<input id="${field.name}" name="${field.name}" type="${field.type}">`);
+            fieldGroup.append(`<input id="${field.name}" name="attributes[${field.name}]" type="${field.type}">`);
             $('#additionalFields').append(fieldGroup);
         });
 

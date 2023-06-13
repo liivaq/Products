@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Services\Product\CreateProductRequest;
 
 class Furniture extends Product
 {
@@ -10,13 +9,13 @@ class Furniture extends Product
     protected int $width;
     protected int $length;
 
-    public function __construct(CreateProductRequest $request)
+    public function __construct(array $attributes, string $type)
     {
-        parent::__construct($request);
+        parent::__construct($attributes, $type);
 
-        $this->height = (int) $request->getHeight();
-        $this->length = (int) $request->getLength();
-        $this->width = (int) $request->getWidth();
+        $this->height = (int) $attributes['height'];
+        $this->length = (int) $attributes['length'];
+        $this->width = (int) $attributes['width'];
         $this->measurementUnit = 'CM';
     }
 

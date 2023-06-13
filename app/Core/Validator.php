@@ -6,7 +6,7 @@ class Validator
 {
     public static function form(array $request): bool
     {
-        foreach($request as $attribute){
+        foreach($request['attributes'] as $attribute){
             if(empty($attribute)){
                 Session::flash('errors', 'Please, submit required data');
             }
@@ -15,6 +15,11 @@ class Validator
                 Session::flash('errors', 'Please, provide the data of indicated type');
             }
         }
+
+        if(!isset($request['type'])){
+            Session::flash('errors', 'Please, provide the data of indicated type');
+        }
+
         return Session::has('errors');
     }
 }

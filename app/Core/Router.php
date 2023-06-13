@@ -2,7 +2,11 @@
 
 namespace App\Core;
 
+use App\Core\Response\Redirect;
+use App\Core\Response\Response;
+use App\Core\Response\View;
 use FastRoute;
+
 class Router
 {
     public static function route(array $routes): Response
@@ -26,7 +30,7 @@ class Router
         switch ($routeInfo[0]) {
             case FastRoute\Dispatcher::NOT_FOUND:
             case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
-                return new View('errors/notFound', []);
+                return new View('notFound');
             case FastRoute\Dispatcher::FOUND:
                 $handler = $routeInfo[1];
                 $vars = $routeInfo[2];

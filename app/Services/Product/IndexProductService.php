@@ -13,7 +13,7 @@ class IndexProductService
         $this->productDatabaseRepository = new ProductDatabaseRepository();
     }
 
-    public function execute()
+    public function execute(): array
     {
         return $this->productDatabaseRepository->all();
     }

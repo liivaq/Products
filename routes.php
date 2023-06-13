@@ -2,11 +2,11 @@
 
 return [
     ['GET', '/', ['App\Controllers\ProductController', 'index']],
-    ['GET', '/add-product', ['App\Controllers\ProductController', 'show']],
+    ['GET', '/add-product', ['App\Controllers\ProductController', 'create']],
 
-    ['POST', '/product', ['App\Controllers\ProductController', 'create']],
+    ['POST', '/product', ['App\Controllers\ProductController', 'store']],
 
     ['POST', '/delete', ['App\Controllers\ProductController', 'delete']],
 
-    ['POST', '/sku', ['App\Controllers\ProductController', 'validateSku']]
+    ['POST', '/validate', ['App\Controllers\ProductController', 'validate']]
 ];

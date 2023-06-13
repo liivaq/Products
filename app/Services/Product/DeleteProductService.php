@@ -13,7 +13,7 @@ class DeleteProductService
         $this->productDatabaseRepository = new ProductDatabaseRepository;
     }
 
-    public function execute(array $products)
+    public function execute(array $products): void
     {
         $this->productDatabaseRepository->delete($products['delete']);
     }

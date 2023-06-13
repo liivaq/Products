@@ -37,7 +37,7 @@ button {
     background: gray;
 }
 
-a {
+.nav-buttons a {
     text-decoration: none;
     color: white;
 }
@@ -47,14 +47,13 @@ a {
     margin-left: 20px;
 }
 
-/* Form groups */
-.form-group {
 
+.form-group {
     align-items: center;
     margin-bottom: 20px;
 }
 
-/* Labels */
+
 label {
     flex: 0 0 100px;
     text-align: right;
@@ -62,18 +61,17 @@ label {
     font-weight: bold;
 }
 
-/* Input fields */
+
 input[type="text"],
 input[type="number"],
 select {
-
     width: 100%;
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
-/* Error labels */
+
 .error {
     color: red;
     font-size: 12px;
@@ -81,13 +79,13 @@ select {
     flex: 1;
 }
 
-/* Additional field error labels */
+
 .additionalFieldRow .error {
     margin-top: 5px;
     margin-left: 10px;
 }
 
-/* Style the type description */
+
 #typeDescription {
     margin-top: 10px;
     font-style: italic;
@@ -108,6 +106,10 @@ select {
     border: solid;
     padding: 10px;
     font-size: 20px;
+}
+
+.product-attributes{
+    text-align: center;
 }
 
 .delete-checkbox{

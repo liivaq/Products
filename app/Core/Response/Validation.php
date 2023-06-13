@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Core;
+namespace App\Core\Response;
 
-class InputValidator implements Response
+class Validation implements Response
 {
     private bool $response;
 

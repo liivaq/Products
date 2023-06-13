@@ -13,8 +13,9 @@ class ValidateProductService
         $this->productDatabaseRepository = new ProductDatabaseRepository();
     }
 
-    public function execute(string $sku){
-       return $this->productDatabaseRepository->authenticate($sku);
+    public function execute(string $sku): void
+    {
+       $this->productDatabaseRepository->authenticate($sku);
     }
 
 }

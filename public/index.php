@@ -1,10 +1,11 @@
 <?php declare(strict_types=1);
 
-use App\Core\Redirect;
 use App\Core\Renderer;
+use App\Core\Response\Redirect;
+use App\Core\Response\Validation;
+use App\Core\Response\View;
 use App\Core\Router;
-use App\Core\InputValidator;
-use App\Core\View;
+use App\Core\Session;
 
 require_once '../vendor/autoload.php';
 
@@ -18,14 +19,14 @@ $response = Router::route($routes);
 
 if($response instanceof View){
     echo (new Renderer())->render($response);
-    \App\Core\Session::unflash();
+    Session::unflash();
 }
 
 if($response instanceof Redirect){
     header('Location: '.$response->getPath());
 }
 
-if($response instanceof InputValidator){
+if($response instanceof Validation){
     echo json_encode($response->isResponse());
 }
 

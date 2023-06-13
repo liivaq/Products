@@ -5,10 +5,10 @@
 
 {% block buttons %}
     <a href="/add-product">
-        <button class="success-button"> Add </button>
+        <button class="success-button"> Add</button>
     </a>
 
-    <button class="delete-product-btn" type="submit" form="delete_form"> Mass Delete </button>
+    <button class="delete-product-btn" type="submit" form="delete_form"> Mass Delete</button>
 
 {% endblock %}
 
@@ -20,24 +20,25 @@
                 <label for="delete-checkbox"></label>
                 <input class="delete-checkbox" type="checkbox" id="delete-checkbox" name="delete[]"
                        value="{{ product.sku }}">
-                <div class="attribute-list">
-                    <p>{{ product.sku }}</p>
-                    <p>{{ product.name }}</p>
-                    <p>{{ product.price|number_format(2) }} {{ product.currency }}</p>
+                <div class="product-attributes">
+                    <div class="attribute-list">
+                        <p>{{ product.sku }}</p>
+                        <p>{{ product.name }}</p>
+                        <p>{{ product.price|number_format(2) }} {{ product.currency }}</p>
 
-                    {% if product.size is defined %}
-                        <p>{{ product.size }} {{ product.measurementUnit }}</p>
-                    {% endif %}
+                        {% if product.size is defined %}
+                            <p>{{ product.size }} {{ product.measurementUnit }}</p>
+                        {% endif %}
 
-                    {% if product.weight  is defined %}
-                        <p>{{ product.weight }} {{ product.measurementUnit }}</p>
-                    {% endif %}
+                        {% if product.weight  is defined %}
+                            <p>{{ product.weight }} {{ product.measurementUnit }}</p>
+                        {% endif %}
 
-                    {% if product.height  is defined %}
-                        <p>{{ product.height }}x{{ product.length }}x{{ product.width }}</p>
-                    {% endif %}
+                        {% if product.height  is defined %}
+                            <p>{{ product.height }}x{{ product.length }}x{{ product.width }}</p>
+                        {% endif %}
+                    </div>
                 </div>
-
             </div>
         {% endfor %}
     </form>
