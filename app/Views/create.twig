@@ -1,9 +1,5 @@
 {% extends "layout.twig" %}
 
-{% block script %}
-
-{% endblock %}
-
 {% block title %}
     Product Add
 {% endblock %}
@@ -11,9 +7,15 @@
 {% block heading %} <h1>Product Add</h1> {% endblock %}
 
 {% block buttons %}
-    <button class="success-button" form="product_form" type="submit" id="submit">Save</button>
+
+    <button class="success-button" form="product_form" type="submit" id="submit">
+        Save
+    </button>
+
     <a href="/">
-        <button class="cancel-button" type="button"> Cancel</button>
+        <button class="cancel-button" type="button">
+            Cancel
+        </button>
     </a>
 
 {% endblock %}
@@ -22,19 +24,20 @@
     <form id="product_form" method="post" action="/product">
         <div class="form-group">
             <label for="sku">SKU</label>
-            <input id="sku" name="attributes[sku]" type="text" value="{{ session._flash.sku }}">
+            <input id="sku" name="sku" type="text" value="{{ session._flash.sku }}" class="required">
             <label id="sku-error" class="error" for="sku"></label>
         </div>
 
         <div class="form-group">
             <label for="name">Name</label>
-            <input id="name" name="attributes[name]" type="text" value="{{ session._flash.name }}">
+            <input id="name" name="name" type="text" value="{{ session._flash.name }}" class="required">
             <label id="name-error" class="error" for="name"></label>
         </div>
 
         <div class="form-group">
             <label for="price">Price</label>
-            <input id="price" name="attributes[price]" type="number" step="0.01" min="0" value="{{ session._flash.price }}">
+            <input id="price" name="price" type="number" step="0.01" min="0"
+                   value="{{ session._flash.price }}" class="required digits">
             <label id="price-error" class="error" for="price"></label>
         </div>
 
@@ -55,6 +58,7 @@
             {{ session._flash.errors }}
         </div>
     </form>
+
     <script src="/js/custom-attributes.js"></script>
     <script src="/js/validate.js"></script>
 {% endblock %}

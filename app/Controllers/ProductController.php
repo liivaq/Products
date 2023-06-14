@@ -2,17 +2,11 @@
 
 namespace App\Controllers;
 
-use App\Core\Response\Redirect;
-use App\Core\Response\Response;
-use App\Core\Response\Validation;
-use App\Core\Response\View;
+use App\Services\Product\{CreateProductService, DeleteProductService, IndexProductService, ValidateProductService};
+use App\Core\Response\{Redirect, Response, Validation, View};
+use App\Exceptions\ProductAlreadyExistsException;
 use App\Core\Session;
 use App\Core\Validator;
-use App\Exceptions\ProductAlreadyExistsException;
-use App\Services\Product\CreateProductService;
-use App\Services\Product\DeleteProductService;
-use App\Services\Product\IndexProductService;
-use App\Services\Product\ValidateProductService;
 
 class ProductController
 {
@@ -46,20 +40,21 @@ class ProductController
 
     public function store(): Response
     {
-        foreach ($_POST['attributes'] as $key => $value) {
+        foreach ($_POST as $key => $value) {
             Session::flash($key, $value);
         }
 
         if (Validator::form($_POST)) {
             return new Redirect('/add-product');
-        };
+        }
 
         try {
-            $this->createProductService->execute($_POST['type'], $_POST['attributes']);
+            $this->createProductService->execute($_POST);
         } catch (ProductAlreadyExistsException $e) {
             Session::flash('errors', 'Product with this SKU already exists');
             return new Redirect('/add-product');
         }
+
         return new Redirect('/');
     }
 

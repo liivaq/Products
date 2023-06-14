@@ -6,9 +6,9 @@ class Book extends Product
 {
     protected int $weight;
 
-    public function __construct(array $attributes, string $type)
+    public function __construct(array $attributes)
     {
-        parent::__construct($attributes, $type);
+        parent::__construct($attributes);
 
         $this->weight = (int)$attributes['weight'];
         $this->measurementUnit = 'KG';

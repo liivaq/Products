@@ -22,23 +22,19 @@ $(document).ready(function () {
         }
     };
 
-    // Function to handle the change event of the productType select element
     $('#productType').change(function () {
-        const selectedType = $(this).val(); // Get the selected value
+        const selectedType = $(this).val();
 
-        // Clear the additionalFields div
         $('#additionalFields').empty();
         const typeConfig = fieldsConfig[selectedType];
 
-        // Generate fields based on the selected type
         typeConfig.fields.forEach(function (field) {
             const fieldGroup = $('<div class="form-group"></div>');
             fieldGroup.append(`<label for="${field.name}">${field.label}</label>`);
-            fieldGroup.append(`<input id="${field.name}" name="attributes[${field.name}]" type="${field.type}">`);
+            fieldGroup.append(`<input id="${field.name}" name="${field.name}" class="digits" type="${field.type}">`);
             $('#additionalFields').append(fieldGroup);
         });
 
-        // Display the description for the selected type
         $('#typeDescription').text(typeConfig.description);
     });
 });

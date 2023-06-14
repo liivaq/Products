@@ -9,9 +9,9 @@ class Furniture extends Product
     protected int $width;
     protected int $length;
 
-    public function __construct(array $attributes, string $type)
+    public function __construct(array $attributes)
     {
-        parent::__construct($attributes, $type);
+        parent::__construct($attributes);
 
         $this->height = (int) $attributes['height'];
         $this->length = (int) $attributes['length'];

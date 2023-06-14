@@ -10,15 +10,13 @@ abstract class Product
     protected float $price;
     protected string $measurementUnit;
     protected string $currency = '$';
-    protected array $allAttributes;
 
-    public function __construct(array $attributes, string $type)
+    public function __construct(array $attributes)
     {
         $this->sku = $attributes['sku'];
         $this->name = $attributes['name'];
         $this->price = (float)$attributes['price'];
-        $this->allAttributes = $attributes;
-        $this->allAttributes['type'] = $type;
+        $this->type = $attributes['type'];
     }
 
     public function getSku(): string
@@ -36,10 +34,11 @@ abstract class Product
         return $this->price;
     }
 
-    public function getAllAttributes(): array
+    public function getType(): string
     {
-        return $this->allAttributes;
+        return $this->type;
     }
+
 
     public function getMeasurementUnit(): string
     {

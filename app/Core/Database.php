@@ -1,7 +1,8 @@
 <?php declare(strict_types=1);
 
 namespace App\Core;
-use Doctrine\DBAL\{Connection, DriverManager};
+
+use Doctrine\DBAL\{Connection, DriverManager, Exception};
 
 class Database
 {
@@ -19,6 +20,7 @@ class Database
             ];
 
             self::$connection = DriverManager::getConnection($connectionParams);
+
         }
         return self::$connection;
     }

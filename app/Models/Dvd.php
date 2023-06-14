@@ -6,9 +6,9 @@ class Dvd extends Product
 {
     protected int $size;
 
-    public function __construct(array $attributes, string $type)
+    public function __construct(array $attributes)
     {
-        parent::__construct($attributes, $type);
+        parent::__construct($attributes);
 
         $this->size = (int )$attributes['size'];
         $this->measurementUnit = 'MB';
