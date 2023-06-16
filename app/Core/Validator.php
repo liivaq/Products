@@ -2,12 +2,14 @@
 
 namespace App\Core;
 
+use App\Exceptions\InvalidInputException;
+
 class Validator
 {
-    public static function form(array $request): bool
+    public static function form(array $request): void
     {
-        foreach($request['attributes'] as $attribute){
-            if(empty($attribute)){
+        foreach($request as $attribute){
+            if(empty(trim($attribute))){
                 Session::flash('errors', 'Please, submit required data');
             }
 
@@ -20,6 +22,8 @@ class Validator
             Session::flash('errors', 'Please, provide the data of indicated type');
         }
 
-        return Session::has('errors');
+        if(Session::has('errors')){
+            throw new InvalidInputException();
+        }
     }
 }

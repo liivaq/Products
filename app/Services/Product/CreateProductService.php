@@ -11,7 +11,7 @@ class CreateProductService
 
     public function __construct()
     {
-        $this->productDatabaseRepository = new ProductDatabaseRepository;
+        $this->productDatabaseRepository = new ProductDatabaseRepository();
     }
 
     public function execute(array $attributes)

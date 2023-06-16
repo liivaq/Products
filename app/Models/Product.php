@@ -4,12 +4,12 @@ namespace App\Models;
 
 abstract class Product
 {
-    protected string $sku;
-    protected string $name;
-    protected string $type;
-    protected float $price;
+    private string $sku;
+    private string $name;
+    private string $type;
+    private float $price;
     protected string $measurementUnit;
-    protected string $currency = '$';
+    private string $currency = '$';
 
     public function __construct(array $attributes)
     {
@@ -38,7 +38,6 @@ abstract class Product
     {
         return $this->type;
     }
-
 
     public function getMeasurementUnit(): string
     {

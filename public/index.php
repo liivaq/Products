@@ -24,6 +24,7 @@ if($response instanceof View){
 
 if($response instanceof Redirect){
     header('Location: '.$response->getPath());
+    exit;
 }
 
 if($response instanceof Validation){

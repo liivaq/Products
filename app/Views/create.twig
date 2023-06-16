@@ -37,7 +37,7 @@
         <div class="form-group">
             <label for="price">Price</label>
             <input id="price" name="price" type="number" step="0.01" min="0"
-                   value="{{ session._flash.price }}" class="required digits">
+                   value="{{ session._flash.price }}" class="required">
             <label id="price-error" class="error" for="price"></label>
         </div>
 
@@ -60,5 +60,5 @@
     </form>
 
     <script src="/js/custom-attributes.js"></script>
-    <script src="/js/validate.js"></script>
+   {# <script src="/js/validate.js"></script>#}
 {% endblock %}

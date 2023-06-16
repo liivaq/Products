@@ -4,7 +4,7 @@ namespace App\Models;
 
 class Dvd extends Product
 {
-    protected int $size;
+    private int $size;
 
     public function __construct(array $attributes)
     {

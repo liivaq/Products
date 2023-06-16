@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Core\Database;
+use App\Core\Session;
 use App\Exceptions\ProductAlreadyExistsException;
 use App\Models\Book;
 use App\Models\Dvd;
@@ -27,11 +28,17 @@ class ProductDatabaseRepository
         $productCollection = [];
 
         $products = $this->queryBuilder
-            ->select('p.*', 'b.*', 'd.*', 'f.*')
-            ->from('products', 'p')
-            ->leftJoin('p', 'books', 'b', 'p.sku = b.products_sku')
-            ->leftJoin('p', 'dvds', 'd', 'p.sku = d.products_sku')
-            ->leftJoin('p', 'furniture', 'f', 'p.sku = f.products_sku')
+            ->select('products.*', 'books.*', 'dvds.*', 'furniture.*')
+            ->from('products')
+            ->leftJoin(
+                'products', 'books', 'books', 'products.sku = books.products_sku'
+            )
+            ->leftJoin(
+                'products', 'dvds', 'dvds', 'products.sku = dvds.products_sku'
+            )
+            ->leftJoin(
+                'products', 'furniture', 'furniture', 'products.sku = furniture.products_sku'
+            )
             ->orderBy('id', 'ASC')
             ->fetchAllAssociative();
 
@@ -47,7 +54,6 @@ class ProductDatabaseRepository
     public function save(Product $product)
     {
         $this->authenticate($product->getSku());
-
         $this->queryBuilder
             ->insert('products')
             ->values([
@@ -61,7 +67,6 @@ class ProductDatabaseRepository
             ->setParameter('price', $product->getPrice())
             ->setParameter('type', $product->getType())
             ->executeStatement();
-
 
         $productMap = [
             'Book' => 'saveBook',
@@ -94,6 +99,7 @@ class ProductDatabaseRepository
             ->executeStatement();
 
         if ($product > 0) {
+            Session::flash('errors', 'Product with this SKU already exists');
             throw new ProductAlreadyExistsException('Product with sku ' . $sku . 'already exists');
         }
     }
@@ -101,7 +107,7 @@ class ProductDatabaseRepository
     private function buildModel(string $type, array $attributes)
     {
         $product = 'App\Models\\' . $type;
-        return new $product($attributes, $type);
+        return new $product($attributes);
     }
 
     private function saveBook(Book $book)

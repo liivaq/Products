@@ -2,20 +2,19 @@
 
 namespace App\Models;
 
-
 class Furniture extends Product
 {
-    protected int $height;
-    protected int $width;
-    protected int $length;
+    private int $height;
+    private int $width;
+    private int $length;
 
     public function __construct(array $attributes)
     {
         parent::__construct($attributes);
 
-        $this->height = (int) $attributes['height'];
-        $this->length = (int) $attributes['length'];
-        $this->width = (int) $attributes['width'];
+        $this->height = (int)$attributes['height'];
+        $this->length = (int)$attributes['length'];
+        $this->width = (int)$attributes['width'];
         $this->measurementUnit = 'CM';
     }
 

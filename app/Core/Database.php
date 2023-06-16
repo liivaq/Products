@@ -2,7 +2,7 @@
 
 namespace App\Core;
 
-use Doctrine\DBAL\{Connection, DriverManager, Exception};
+use Doctrine\DBAL\{Connection, DriverManager};
 
 class Database
 {
@@ -20,7 +20,6 @@ class Database
             ];
 
             self::$connection = DriverManager::getConnection($connectionParams);
-
         }
         return self::$connection;
     }

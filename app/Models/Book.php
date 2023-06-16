@@ -4,7 +4,7 @@ namespace App\Models;
 
 class Book extends Product
 {
-    protected int $weight;
+    private int $weight;
 
     public function __construct(array $attributes)
     {
@@ -18,5 +18,4 @@ class Book extends Product
     {
         return $this->weight;
     }
-
 }

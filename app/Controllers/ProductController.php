@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Exceptions\InvalidInputException;
 use App\Services\Product\{CreateProductService, DeleteProductService, IndexProductService, ValidateProductService};
 use App\Core\Response\{Redirect, Response, Validation, View};
 use App\Exceptions\ProductAlreadyExistsException;
@@ -13,7 +14,6 @@ class ProductController
     private CreateProductService $createProductService;
     private IndexProductService $indexProductService;
     private DeleteProductService $deleteProductService;
-
     private ValidateProductService $validateProductService;
 
     public function __construct()
@@ -44,23 +44,18 @@ class ProductController
             Session::flash($key, $value);
         }
 
-        if (Validator::form($_POST)) {
-            return new Redirect('/add-product');
-        }
-
         try {
+            Validator::form($_POST);
             $this->createProductService->execute($_POST);
-        } catch (ProductAlreadyExistsException $e) {
-            Session::flash('errors', 'Product with this SKU already exists');
+            return new Redirect('/');
+        } catch (ProductAlreadyExistsException | InvalidInputException $e) {
             return new Redirect('/add-product');
         }
-
-        return new Redirect('/');
     }
 
     public function delete(): Redirect
     {
-        if(empty($_POST['delete'])){
+        if (empty($_POST['delete'])) {
             return new Redirect('/');
         }
 
@@ -73,7 +68,7 @@ class ProductController
         try {
             $this->validateProductService->execute($_POST['sku']);
             $response = true;
-        }catch(ProductAlreadyExistsException $e){
+        } catch (ProductAlreadyExistsException $e) {
             $response = false;
         }
         return new Validation($response);

@@ -2,7 +2,7 @@ $(document).ready(function () {
     const fieldsConfig = {
         Book: {
             fields: [
-                { label: 'Weight (KG)', name: 'weight', type: 'text' }
+                { label: 'Weight (KG)', name: 'weight', type: 'number' }
             ],
             description: 'Please provide weight.'
         },
