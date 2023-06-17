@@ -1,13 +1,14 @@
 # Product page
 
 1. Add Products:
-![add-products](https://github.com/liivaq/Products/assets/123387229/439b6305-064a-4337-9f01-4da0e9a2d428)
+
 
 2. Validation, while adding products
-![validation](https://github.com/liivaq/Products/assets/123387229/e5278045-cf75-4822-81a7-1f31c28010e1)
+
 
 3. Delete Products:
-![mass-delete](https://github.com/liivaq/Products/assets/123387229/4fcf9532-4947-409c-b954-ddac8f9eb54a)
+![mass-delete](https://github.com/liivaq/Products/assets/123387229/16f9011f-73ca-446b-8250-46efcc55b1a5)
+
 
 # To run project:
 
