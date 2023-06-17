@@ -24,20 +24,20 @@
     <form id="product_form" method="post" action="/product">
         <div class="form-group">
             <label for="sku">SKU</label>
-            <input id="sku" name="sku" type="text" value="{{ session._flash.sku }}" class="required">
+            <input id="sku" name="sku" type="text" value="{{ session._flash.sku }}" class="required" autocomplete="off">
             <label id="sku-error" class="error" for="sku"></label>
         </div>
 
         <div class="form-group">
             <label for="name">Name</label>
-            <input id="name" name="name" type="text" value="{{ session._flash.name }}" class="required">
+            <input id="name" name="name" type="text" value="{{ session._flash.name }}" class="required" autocomplete="off">
             <label id="name-error" class="error" for="name"></label>
         </div>
 
         <div class="form-group">
-            <label for="price">Price</label>
+            <label for="price">Price ($)</label>
             <input id="price" name="price" type="number" step="0.01" min="0"
-                   value="{{ session._flash.price }}" class="required">
+                   value="{{ session._flash.price }}" class="required" autocomplete="off">
             <label id="price-error" class="error" for="price"></label>
         </div>
 
@@ -49,7 +49,7 @@
                 <option id="book" value="Book">Book</option>
                 <option id="furniture" value="Furniture">Furniture</option>
             </select>
-            <label id="productType-error" class="error" for="name"></label>
+            <label id="productType-error" class="error" for="productType"></label>
         </div>
 
         <div id="additionalFields"></div>
