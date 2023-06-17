@@ -40,15 +40,14 @@ class ProductController
 
     public function store(): Response
     {
-        foreach ($_POST as $key => $value) {
-            Session::flash($key, $value);
-        }
-
         try {
             Validator::form($_POST);
             $this->createProductService->execute($_POST);
             return new Redirect('/');
         } catch (ProductAlreadyExistsException | InvalidInputException $e) {
+            foreach ($_POST as $key => $value) {
+                Session::flash($key, $value);
+            }
             return new Redirect('/add-product');
         }
     }

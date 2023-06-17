@@ -8,10 +8,6 @@ class Session
         return (bool)static::get($key);
     }
 
-    public static function put($key, $value)
-    {
-        $_SESSION[$key] = $value;
-    }
 
     public static function get($key, $default = null)
     {

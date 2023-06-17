@@ -102,6 +102,7 @@ class ProductDatabaseRepository
             Session::flash('errors', 'Product with this SKU already exists');
             throw new ProductAlreadyExistsException('Product with sku ' . $sku . 'already exists');
         }
+
     }
 
     private function buildModel(string $type, array $attributes)
