@@ -2,12 +2,15 @@
 Demo available here: https://scandiweb-junior-test-liva.000webhostapp.com/
 
 ## 1. Add Products:
-![add-products](https://github.com/liivaq/Products/assets/123387229/92543565-3b6c-405d-8296-61b933402b36)
+![add-products](https://github.com/liivaq/Products/assets/123387229/c4def98d-26d5-479b-96c9-8da6f2c1d57b)
+
 
 ---
 ## 2. Validation:
-![validation](https://github.com/liivaq/Products/assets/123387229/12e40193-e526-460e-8e00-a215bd8135d2)
+![validation](https://github.com/liivaq/Products/assets/123387229/ffaa3854-fd8f-4913-9bf8-a6a07ee8182d)
+
 
 ---
 ## 3. Delete Products:
-![mass-delete](https://github.com/liivaq/Products/assets/123387229/16f9011f-73ca-446b-8250-46efcc55b1a5)
+![mass-delete](https://github.com/liivaq/Products/assets/123387229/220c7a41-ea72-4e49-a003-f793c89dd475)
+
